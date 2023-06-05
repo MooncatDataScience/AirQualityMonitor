@@ -1,8 +1,9 @@
 import pymysql
 import pandas as pd
-import numpy as np
+from sklearn.metrics import r2_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.svm import SVR
@@ -115,6 +116,14 @@ def main():
     prediction = model.predict(X_test)
     print(prediction)
 
+    #======模型驗證======
+    print(X_train.shape, y_train.shape, X_test.shape, y_test.shape )
+    print(prediction.shape)
+
+    print(f'MSE : {mean_squared_error(prediction, y_test)}')
+    print(f'RMSE : {mean_squared_error(prediction, y_test, squared=False)}')
+    print(f'MSE : {mean_absolute_error(prediction, y_test)}')
+    print(f'R2 : {r2_score(prediction, y_test)}')
 
 if __name__ == '__main__':
     main()
